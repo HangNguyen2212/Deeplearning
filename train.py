@@ -30,10 +30,10 @@ class LeNet():
 
     # Layer 1: Conv
     with tf.name_scope('conv1') as scope:
-      kernel = tf.Variable(tf.random_normal([3, 3, 1, 32], dtype=tf.float32, stddev=1e-1, 
+      kernel = tf.Variable(tf.random_normal([3, 3, 1, 6], dtype=tf.float32, stddev=1e-1, 
         name='weights'))
       conv = tf.nn.conv2d(images, kernel, [1, 1, 1, 1], padding='SAME')
-      biases = tf.Variable(tf.constant(0.0, shape=[32], dtype=tf.float32),
+      biases = tf.Variable(tf.constant(0.0, shape=[6], dtype=tf.float32),
         trainable=True, name='biases')
       out = tf.nn.bias_add(conv, biases)
       self.conv1 = tf.nn.relu(out, name=scope)
@@ -48,9 +48,9 @@ class LeNet():
 
     # Layer 2: Conv
     with tf.name_scope('conv2') as scope:
-      kernel = tf.Variable(tf.random_normal([3, 3, 32, 64], dtype=tf.float32, stddev=1e-1, name='weights'))
+      kernel = tf.Variable(tf.random_normal([3, 3, 32, 16], dtype=tf.float32, stddev=1e-1, name='weights'))
       conv = tf.nn.conv2d(self.pool1, kernel, [1, 1, 1, 1], padding='SAME')
-      biases = tf.Variable(tf.constant(0.0, shape=[64], dtype=tf.float32),
+      biases = tf.Variable(tf.constant(0.0, shape=[16], dtype=tf.float32),
         trainable=True, name='biases')
       out = tf.nn.bias_add(conv, biases)
       self.conv2 = tf.nn.relu(out, name=scope)
